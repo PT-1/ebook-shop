@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:internship_ui/constants/login_register.dart';
 import 'package:internship_ui/sign_up.dart';
 
 import 'forgot_password.dart';
@@ -12,7 +13,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final book_image_key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,15 +24,18 @@ class _SignInState extends State<SignIn> {
               Stack(children: [
                 Container(
                   height: 220,
-                  decoration: BoxDecoration(color: Colors.orange),
+                  decoration: BoxDecoration(color: Colors.orange,),
                 ),
                 Positioned(
-                  child: Card(
-                      elevation: 20,
-                      child: Image(
-                        image: AssetImage("assets/images/book_image.png"),
-                        key: book_image_key,
-                      )),
+                    child: Card(
+                        elevation: 20,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5.0),
+                          child: Image(
+                            image: AssetImage("assets/images/book_image.png"),
+                          ),
+                        ),
+                    ),
                   top: 80,
                   left: MediaQuery.of(context).size.width / 2 - 40,
                 ),
@@ -79,7 +82,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
-                                email(),
+                                email(context),
                                 Container(
                                   child: Icon(Icons.chevron_right_sharp),
                                   color: Colors.white,
@@ -109,7 +112,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
-                                password(),
+                                password(context),
                                 Container(
                                   child: Icon(Icons.remove_red_eye),
                                 )
@@ -158,10 +161,7 @@ class _SignInState extends State<SignIn> {
                             height: 40,
                             child: OutlinedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignIn()));
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("To be implemented")));
                               },
                               child: Text(
                                 "Sign In",
@@ -276,40 +276,40 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Widget email() {
-    double deviceWidth = MediaQuery.of(context).size.width;
-
-    return Container(
-      width: deviceWidth * 0.80,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          maxLines: 1,
-          decoration: new InputDecoration(
-            hintText: "abc@efg.com",
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget password() {
-    double deviceWidth = MediaQuery.of(context).size.width;
-
-    return Container(
-      width: deviceWidth * 0.80,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          obscureText: true,
-          maxLines: 1,
-          decoration: new InputDecoration(
-            hintText: "***********",
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget email() {
+  //   double deviceWidth = MediaQuery.of(context).size.width;
+  //
+  //   return Container(
+  //     width: deviceWidth * 0.80,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: TextFormField(
+  //         keyboardType: TextInputType.emailAddress,
+  //         maxLines: 1,
+  //         decoration: new InputDecoration(
+  //           hintText: "abc@efg.com",
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // Widget password() {
+  //   double deviceWidth = MediaQuery.of(context).size.width;
+  //
+  //   return Container(
+  //     width: deviceWidth * 0.80,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: TextFormField(
+  //         keyboardType: TextInputType.text,
+  //         obscureText: true,
+  //         maxLines: 1,
+  //         decoration: new InputDecoration(
+  //           hintText: "***********",
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
